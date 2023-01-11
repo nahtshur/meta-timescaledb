@@ -2,6 +2,8 @@ Yocto layer for Timescaledb.
 
 https://www.timescale.com/
 
+Based on the repo https://github.com/cnelson711/osm-bb.
+
 Run 'bitbake-layers add-layer meta-timescaledb'
 
 

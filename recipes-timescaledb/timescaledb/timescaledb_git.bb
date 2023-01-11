@@ -11,8 +11,6 @@ S = "${WORKDIR}//git"
 DEPENDS += "postgresql"
 inherit cmake
 
-
-
 # We rely on postgresql to have a crossscript alternative to the binary pg_config
 #  --with-pgconfig=${STAGING_BINDIR_CROSS}/pg_config 
 EXTRA_OECONF = "\
@@ -33,9 +31,7 @@ rm ${STAGING_DIR_TARGET}/pg_config
 
 FILES:${PN} += "*"
 
-FILES:${PN} += "${libdir}/postgresql/lib/*"
-FILES:${PN} += "${datadir}"
-FILES:${PN} += "${datadir}/postgresql"
+FILES:${PN} += "${libdir}/postgresql"
 FILES:${PN} += "${datadir}/postgresql/extension/*"
 
 
