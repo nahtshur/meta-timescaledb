@@ -1,0 +1,149 @@
+#!/bin/bash
+
+# cross-compile safe pg_config alternative
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+PREFIX="$DIR/"
+CONFIG_BINDIR=/usr/bin
+CONFIG_DOCDIR=/usr/share/postgresql
+CONFIG_HTMLDIR=/usr/share/postgresql
+CONFIG_INCLUDEDIR=${PREFIX}usr/include/postgresql/server
+CONFIG_PKGINCLUDEDIR=${PREFIX}usr/include/postgresql/server
+CONFIG_INCLUDEDIR_SERVER=${PREFIX}usr/include/postgresql/server
+CONFIG_LIBDIR=${PREFIX}usr/lib
+CONFIG_PKGLIBDIR=/usr/lib/postgresql/lib
+CONFIG_LOCALEDIR=/usr/share/locale
+CONFIG_MANDIR=/usr/share/postgresql/man
+CONFIG_SHAREDIR=/usr/share/postgresql
+CONFIG_SYSCONFDIR=/etc/postgresql-common
+CONFIG_PGXS=${PREFIX}usr/lib/postgresql/pgxs/src/makefiles/pgxs.mk
+CONFIG_CONFIGURE=''
+CONFIG_CC=gcc
+CONFIG_CPPFLAGS="-DFRONTEND -Wdate-time -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE"
+CONFIG_CFLAGS="-Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -fno-omit-frame-pointer"
+CONFIG_CFLAGS_SL="-fPIC"
+CONFIG_LDFLAGS="-L../../src/common -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed"
+CONFIG_LDFLAGS_EX=
+CONFIG_LDFLAGS_SL=
+CONFIG_LIBS="-lpgcommon -lpgport -lpthread -lselinux -lxslt -lxml2 -lpam -lssl -lcrypto -lgssapi_krb5 -lz -ledit -lrt -lcrypt -ldl -lm "
+CONFIG_VERSION="PostgreSQL 14.5"
+
+usage()
+{
+	cat <<EOF
+pg_config provides information about the installed version of PostgreSQL.
+
+Usage:
+  pg_config [OPTION]...
+
+Options:
+  --bindir              show location of user executables
+  --docdir              show location of documentation files
+  --htmldir             show location of HTML documentation files
+  --includedir          show location of C header files of the client
+                        interfaces
+  --pkgincludedir       show location of other C header files
+  --includedir-server   show location of C header files for the server
+  --libdir              show location of object code libraries
+  --pkglibdir           show location of dynamically loadable modules
+  --localedir           show location of locale support files
+  --mandir              show location of manual pages
+  --sharedir            show location of architecture-independent support files
+  --sysconfdir          show location of system-wide configuration files
+  --pgxs                show location of extension makefile
+  --configure           show options given to "configure" script when
+                        PostgreSQL was built
+  --cc                  show CC value used when PostgreSQL was built
+  --cppflags            show CPPFLAGS value used when PostgreSQL was built
+  --cflags              show CFLAGS value used when PostgreSQL was built
+  --cflags_sl           show CFLAGS_SL value used when PostgreSQL was built
+  --ldflags             show LDFLAGS value used when PostgreSQL was built
+  --ldflags_ex          show LDFLAGS_EX value used when PostgreSQL was built
+  --ldflags_sl          show LDFLAGS_SL value used when PostgreSQL was built
+  --libs                show LIBS value used when PostgreSQL was built
+  --version             show the PostgreSQL version
+  -?, --help            show this help, then exit
+EOF
+	exit $1
+}
+
+if test $# -eq 0; then
+	usage 1 1>&2
+fi
+
+case $1 in
+  --bindir)
+    echo $CONFIG_BINDIR
+    ;;
+  --docdir)
+    echo $CONFIG_DOCDIR
+    ;;
+  --htmldir)
+    echo $CONFIG_HTMLDIR
+    ;;
+  --includedir)
+    echo $CONFIG_INCLUDEDIR
+    ;;
+  --pkgincludedir)
+    echo $CONFIG_PKGINCLUDEDIR
+    ;;
+  --includedir-server)
+    echo $CONFIG_INCLUDEDIR_SERVER
+    ;;
+  --libdir)
+    echo $CONFIG_LIBDIR
+    ;;
+  --pkglibdir)
+    echo $CONFIG_PKGLIBDIR
+    ;;
+  --localedir)
+    echo $CONFIG_LOCALEDIR
+    ;;
+  --mandir)
+    echo $CONFIG_MANDIR
+    ;;
+  --sharedir)
+    echo $CONFIG_SHAREDIR
+    ;;
+  --sysconfdir)
+    echo $CONFIG_SYSCONFDIR
+    ;;
+  --pgxs)
+    echo $CONFIG_PGXS
+    ;;
+  --configure)
+    echo $CONFIG_CONFIGURE
+    ;;
+  --cc)
+    echo $CONFIG_CC
+    ;;
+  --cppflags)
+    echo $CONFIG_CPPFLAGS
+    ;;
+  --cflags)
+    echo $CONFIG_CFLAGS
+    ;;
+  --cflags_sl)
+    echo $CONFIG_CFLAGS_SL
+    ;;
+  --ldflags)
+    echo $CONFIG_LDFLAGS
+    ;;
+  --ldflags_ex)
+    echo $CONFIG_LDFLAGS_EX
+    ;;
+  --ldflags_sl)
+    echo $CONFIG_LDFLAGS_SL
+    ;;
+  --libs)
+    echo $CONFIG_LIBS
+    ;;
+  --version)
+    echo $CONFIG_VERSION
+    ;;
+  *)
+    usage 1 1>&2
+    ;;
+
+esac
+

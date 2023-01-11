@@ -1,0 +1,7 @@
+Yocto layer for Timescaledb. 
+
+https://www.timescale.com/
+
+Run 'bitbake-layers add-layer meta-timescaledb'
+
+
