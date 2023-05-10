@@ -9,7 +9,7 @@ SRC_URI += "file://pg_config"
 S = "${WORKDIR}//git"
 
 DEPENDS += "postgresql"
-RDEPENDS += "postgresql"
+RDEPENDS:${PN} += "postgresql"
 inherit cmake
 
 # We rely on postgresql to have a crossscript alternative to the binary pg_config
