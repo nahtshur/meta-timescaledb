@@ -1,8 +1,8 @@
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a6919544b6c76fc2e0debe84e8dfc7a5"
 
-SRCREV = "b064b2cd531cda8b8c4c077cc993328d6d10a211"
-SRC_URI = "git://github.com/timescale/timescaledb.git;branch=2.9.x"
+SRCREV = "01c4a2c2ae16cd507e79802f39f9709d38f11d9e"
+SRC_URI = "git://github.com/timescale/timescaledb.git;branch=2.10.x"
 
 SRC_URI += "file://pg_config"
 
